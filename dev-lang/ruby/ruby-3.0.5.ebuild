@@ -13,7 +13,7 @@ RUBYVERSION=${SLOT}.0
 
 DESCRIPTION="A dynamic, interpreted, object-oriented programming language"
 HOMEPAGE="https://www.ruby-lang.org/"
-SRC_URI="https://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.4.tar.xz -> ruby-3.0.4.tar.xz"
+SRC_URI="https://cache.ruby-lang.org/pub/ruby/3.0/ruby-3.0.5.tar.xz -> ruby-3.0.5.tar.xz"
 
 LICENSE="|| ( Ruby-BSD BSD-2 )"
 KEYWORDS="*"
@@ -62,8 +62,10 @@ PDEPEND="
 	rdoc? ( >=dev-ruby/rdoc-6.4.0[ruby_targets_ruby30] )
 	xemacs? ( app-xemacs/ruby-modes )"
 
+
+
 src_prepare() {
-	eapply "${REPODIR}/dev-lang"/files/"${SLOT}"/010*.patch
+	eapply "${REPODIR}/dev-lang"/files/"${SLOT}"/010-default-gem-location.patch
 
 	einfo "Unbundling gems..."
 	cd "$S"
@@ -233,7 +235,7 @@ pkg_postinst() {
 
 	elog
 	elog "To switch between available Ruby profiles, execute as root:"
-	elog "\teselect ruby set ruby(26|27|30|31|...)"
+	elog "\teselect ruby set ruby(27|30|31|...)"
 	elog
 }
 
