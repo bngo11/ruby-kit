@@ -12,7 +12,7 @@ inherit ruby-fakegem
 
 DESCRIPTION="An experimental type-level Ruby interpreter for testing and understanding Ruby code"
 HOMEPAGE="https://github.com/ruby/typeprof"
-SRC_URI="https://github.com/ruby/typeprof/tarball/28faf5f501b1810cfc18d3a113114239baffeeb2 -> typeprof-0.21.4-28faf5f.tar.gz"
+SRC_URI="https://github.com/ruby/typeprof/tarball/f3638a853ca3cf6252a25cb2da37a6ab9378d92b -> typeprof-0.21.6-f3638a8.tar.gz"
 
 KEYWORDS="*"
 LICENSE="MIT"
