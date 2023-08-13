@@ -8,7 +8,7 @@ inherit ruby-ng prefix
 
 DESCRIPTION="Library packaging and distribution for Ruby."
 HOMEPAGE="https://rubygems.org/ https://github.com/rubygems/rubygems"
-SRC_URI="https://github.com/rubygems/rubygems/tarball/36ea2bc28306a1487ec45f5bfbab1bdcb0779e87 -> rubygems-3.4.17-36ea2bc.tar.gz"
+SRC_URI="https://github.com/rubygems/rubygems/tarball/d2e3d8e3f4462f92d67bf60b0833f6b59dcd73fa -> rubygems-3.4.18-d2e3d8e.tar.gz"
 
 KEYWORDS="*"
 LICENSE="GPL-2 || ( Ruby MIT )"
@@ -56,11 +56,16 @@ all_ruby_prepare() {
 	if use test; then
 		rake update_manifest || die
 	fi
+	if [ -d "${S}/exe" ]; then
+		export BIN_EXE_DIR=exe
+	else
+		export BIN_EXE_DIR=bin
+	fi
 }
 
 each_ruby_compile() {
 	# Not really a build but...
-	sed -i -e 's:#!.*:#!'"${RUBY}"':' bin/gem
+	sed -i -e 's:#!.*:#!'"${RUBY}"':' $BIN_EXE_DIR/gem || die
 }
 
 each_ruby_test() {
@@ -87,8 +92,7 @@ each_ruby_install() {
 
 	local sld=$(ruby_rbconfig_value 'sitelibdir')
 	insinto "${sld#${EPREFIX}}"  # bug #320813
-
-	newbin bin/gem $(basename ${RUBY} | sed -e 's:ruby:gem:')
+	newbin $BIN_EXE_DIR/gem $(basename ${RUBY} | sed -e 's:ruby:gem:')
 }
 
 all_ruby_install() {
