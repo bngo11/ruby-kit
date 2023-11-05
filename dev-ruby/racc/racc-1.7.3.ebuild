@@ -13,7 +13,7 @@ inherit ruby-fakegem
 
 DESCRIPTION="Racc is an LALR(1) parser generator.  It is written in Ruby itself, and generates ruby programs."
 HOMEPAGE="https://github.com/ruby/racc"
-SRC_URI="https://github.com/ruby/racc/tarball/0fc0dc957166c2e69a4e95f74d6e23ae80bb770d -> racc-1.7.1-0fc0dc9.tar.gz"
+SRC_URI="https://github.com/ruby/racc/tarball/0ae7d8a406659421efd15ca7603eb01bb5847d38 -> racc-1.7.3-0ae7d8a.tar.gz"
 
 KEYWORDS="*"
 LICENSE="LGPL-2.1"
@@ -39,6 +39,7 @@ all_ruby_prepare() {
 	# the extension.
 	sed -i -e '/rake-compiler/ s:^:#:' -e '/extensiontask/ s:^:#:' Rakefile
 	sed -i -e '/ExtensionTask/,/^  end/ s:^:#:' Rakefile
+	sed -i -e "/require.*testtask/,\$d" Rakefile || die  # delete from testtask to end of line
 	# Which means we need to generate the parser file here
 	rake lib/racc/parser-text.rb || die
 
