@@ -12,7 +12,7 @@ inherit ruby-fakegem
 
 DESCRIPTION="A JSON implementation as a Ruby extension"
 HOMEPAGE="https://github.com/flori/json"
-SRC_URI="https://github.com/flori/json/tarball/7a3b482013eef93dd266db0928b931a28adcf408 -> json-2.7.3-7a3b482.tar.gz"
+SRC_URI="https://github.com/flori/json/tarball/9e9b749576dc7a195241f46305cdb7ed80e3e445 -> json-2.7.4-9e9b749.tar.gz"
 
 KEYWORDS="*"
 LICENSE="Ruby"
@@ -29,7 +29,7 @@ ruby_add_bdepend "dev-ruby/rake
 
 post_src_unpack() {
 	if [ ! -d "${S}/all/${P}" ] ; then
-		mv "${WORKDIR}"/all/flori-json-* "${S}"/all/"${P}" || die
+		mv "${WORKDIR}"/all/ruby-json-* "${S}"/all/"${P}" || die
 	fi
 }
 
@@ -49,7 +49,7 @@ all_ruby_prepare() {
 		-e '/^unless/,/^end/ s:^:#:' ext/json/ext/*/extconf.rb || die
 
 	# Avoid setting gem since it will not be available yet when installing
-	sed -i -e '/gem/ s:^:#:' tests/test_helper.rb || die
+	sed -i -e '/gem/ s:^:#:' test/json/test_helper.rb || die
 }
 
 #each_ruby_compile() {
