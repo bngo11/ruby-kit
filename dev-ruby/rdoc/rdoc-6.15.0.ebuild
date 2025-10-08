@@ -5,7 +5,7 @@ EAPI=7
 USE_RUBY="ruby27 ruby30 ruby31 ruby32"
 RUBY_FAKEGEM_RECIPE_DOC=""
 RUBY_FAKEGEM_DOCDIR="doc"
-RUBY_FAKEGEM_EXTRADOC="History.rdoc README.rdoc RI.md TODO.rdoc"
+RUBY_FAKEGEM_EXTRADOC="History.rdoc README.md RI.md TODO.rdoc"
 RUBY_FAKEGEM_BINWRAP=""
 RUBY_FAKEGEM_BINDIR="exe"
 RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
@@ -43,28 +43,45 @@ post_src_unpack() {
 }
 
 all_ruby_prepare() {
+	# Other packages also have use for a nonexistent directory, bug 321059
+	sed -i -e 's#/nonexistent#/nonexistent_rdoc_tests#g' test/rdoc/rdoc*test.rb || die
+
 	# Avoid unneeded dependency on bundler, bug 603696
 	sed -i -e '/bundler/ s:^:#:' \
 		-e 's/Bundler::GemHelper.gemspec.full_name/"rdoc"/' \
 		-e '/rubocop\/rake/ s:^:#:' \
-		-e '/RuboCop/,/end/ s:^:#:' Rakefile || die
+		-e '/RuboCop/,/])/ s:^:#:' Rakefile || die
 
 	# Skip rubygems tests since the rubygems test case code is no longer installed by rubygems.
 	sed -i -e '/^task/ s/, :rubygems_test//' Rakefile || die
 
-	sed -i -e 's:_relative ": "./:' ${RUBY_FAKEGEM_GEMSPEC} || die
+	# Remove test that is depending on the locale, which we can't garantuee.
+	sed -i -e '/def test_encode_with/,/^  end/ s:^:#:' test/rdoc/rdoc_options_test.rb || die
+
+	# Remove test depending on FEATURES=userpriv, bug 361959
+	sed -i -e '/def test_check_files/,/^  end/ s:^:#:' test/rdoc/rdoc_options_test.rb || die
+
+	sed -e 's:_relative ": "./:' \
+		-e 's/__dir__/"."/' \
+		-i ${RUBY_FAKEGEM_GEMSPEC} || die
+}
+
+each_ruby_prepare() {
+	sed -e "/sh/ s:\"bundle\", \"exec\", :\"${RUBY}\", \"-S\", :" \
+		-i Rakefile || die
 }
 
 all_ruby_compile() {
 	all_fakegem_compile
 
 	if use doc ; then
-		ruby -Ilib -S exe/rdoc || die
+		ruby -S exe/rdoc --force-output || die
 		rm -f doc/js/*.gz || die
 	fi
 }
 
 each_ruby_compile() {
+	export LANG=C.UTF-8
 	${RUBY} -S rake generate || die
 }
 

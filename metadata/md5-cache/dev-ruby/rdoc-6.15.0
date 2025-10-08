@@ -13,4 +13,4 @@ RESTRICT=!test? ( test ) !test? ( test ) !test? ( test )
 SLOT=0
 SRC_URI=https://github.com/ruby/rdoc/tarball/c33d173ffabe9df139efd48bce1986d08a2bbebe -> rdoc-6.15.0-c33d173.tar.gz
 _eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	multilib	d410501a125f99ffb560b0c523cd3d1e	ruby-fakegem	1518a47312d993da9ebf02f89bdeac44	ruby-ng	b696b71528105a90c4e44b101bd7f8ed	ruby-utils	3791942eec3367882de76288f91c9d78	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=e69c2e3de2a0c91ec324c1eb4aab37ee
+_md5_=f063bf08cd254bc8342f0bc8752ba575
