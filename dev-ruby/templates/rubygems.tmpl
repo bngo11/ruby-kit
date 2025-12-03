@@ -30,7 +30,7 @@ ruby_add_bdepend "
 
 post_src_unpack() {
 	if [ ! -d "${S}/all/${P}" ] ; then
-		mv "${WORKDIR}"/all/{{ github_user }}-{{ github_repo }}-* "${S}"/all/"${P}" || die
+		mv "${WORKDIR}"/all/ruby-{{ github_repo }}-* "${S}"/all/"${P}" || die
 	fi
 }
 

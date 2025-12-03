@@ -30,7 +30,7 @@ ruby_add_bdepend "
 
 post_src_unpack() {
 	if [ ! -d "${S}/all/${P}" ] ; then
-		mv "${WORKDIR}"/all/rubygems-rubygems-* "${S}"/all/"${P}" || die
+		mv "${WORKDIR}"/all/ruby-rubygems-* "${S}"/all/"${P}" || die
 	fi
 }
 
