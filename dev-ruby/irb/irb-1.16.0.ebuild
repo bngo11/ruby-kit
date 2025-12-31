@@ -4,16 +4,14 @@ EAPI=7
 
 USE_RUBY="ruby27 ruby30 ruby31 ruby32"
 RUBY_FAKEGEM_EXTRADOC="README.md"
-RUBY_FAKEGEM_BINWRAP=""
 RUBY_FAKEGEM_BINDIR="exe"
-RUBY_FAKEGEM_EXTENSIONS=(ext/debug/extconf.rb)
 RUBY_FAKEGEM_GEMSPEC="${PN}.gemspec"
 
 inherit ruby-fakegem
 
-DESCRIPTION="Debugging functionality for Ruby"
-HOMEPAGE="https://github.com/ruby/debug"
-SRC_URI="https://github.com/ruby/debug/tarball/a86adbb7f7b4f5d88e15b7a0dce05a6cf568b8e1 -> debug-1.11.0-a86adbb.tar.gz"
+DESCRIPTION="interactive Ruby"
+HOMEPAGE="https://github.com/ruby/irb"
+SRC_URI="https://github.com/ruby/irb/tarball/10ed4a777ba80457aa8075b36f3c904787c3fbde -> irb-1.16.0-10ed4a7.tar.gz"
 
 KEYWORDS="*"
 LICENSE="|| ( Ruby BSD-2 )"
@@ -21,21 +19,19 @@ SLOT="0"
 IUSE=""
 
 ruby_add_bdepend "test? ( dev-ruby/test-unit )"
+ruby_add_rdepend "dev-ruby/reline"
 
 post_src_unpack() {
 	if [ ! -d "${S}/all/${P}" ] ; then
-		mv "${WORKDIR}"/all/ruby-debug-* "${S}"/all/"${P}" || die
+		mv "${WORKDIR}"/all/ruby-irb-* "${S}"/all/"${P}" || die
 	fi
 }
 
 all_ruby_prepare() {
-	sed -e "s:require_relative ':require './:" \
-		-e 's/__dir__/"."/' \
-		-i ${RUBY_FAKEGEM_GEMSPEC} || die
 	sed -e 's:require_relative ":require "./:' \
-		-i Rakefile || die
+		-i ${RUBY_FAKEGEM_GEMSPEC} || die
 }
 
 all_ruby_install() {
-	ruby_fakegem_binwrapper rdbg
+	doman man/irb.1
 }

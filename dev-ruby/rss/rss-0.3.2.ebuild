@@ -10,7 +10,7 @@ inherit ruby-fakegem
 
 DESCRIPTION="RSS reading and writing"
 HOMEPAGE="https://github.com/ruby/rss"
-SRC_URI="https://github.com/ruby/rss/tarball/46ba445b683c8ab5695669a1634346b285b32926 -> rss-0.3.1-46ba445.tar.gz"
+SRC_URI="https://github.com/ruby/rss/tarball/29c200c875bc25ae32a15e84dee1584684726fe7 -> rss-0.3.2-29c200c.tar.gz"
 
 LICENSE="BSD-2"
 KEYWORDS="*"
