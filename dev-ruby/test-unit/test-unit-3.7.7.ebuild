@@ -10,7 +10,7 @@ inherit ruby-fakegem
 
 DESCRIPTION="test-unit"
 HOMEPAGE="https://github.com/test-unit/test-unit"
-SRC_URI="https://github.com/test-unit/test-unit/tarball/af736fc84f32951e55071733ebf0176444d2a3ab -> test-unit-3.7.6-af736fc.tar.gz"
+SRC_URI="https://github.com/test-unit/test-unit/tarball/d2a49b77e26426e2c6ce2868169a878bbe59f28a -> test-unit-3.7.7-d2a49b7.tar.gz"
 
 KEYWORDS="*"
 LICENSE="|| ( Ruby GPL-2 ) PSF-2"
