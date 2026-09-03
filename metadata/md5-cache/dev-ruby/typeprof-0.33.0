@@ -11,6 +11,6 @@ RDEPEND=ruby_targets_ruby32? ( >=dev-ruby/rbs-1.8.1[ruby_targets_ruby32(-)] ) ru
 REQUIRED_USE=|| ( ruby_targets_ruby32 ruby_targets_ruby31 ruby_targets_ruby30 ruby_targets_ruby27 )
 RESTRICT=!test? ( test ) !test? ( test )
 SLOT=0
-SRC_URI=https://github.com/ruby/typeprof/tarball/e20d7783c85911c601c8b535cd174f2951f4c430 -> typeprof-0.32.0-e20d778.tar.gz
+SRC_URI=https://github.com/ruby/typeprof/tarball/1eef91dff8e1aff2050edb8c466cb07b888d7ce8 -> typeprof-0.33.0-1eef91d.tar.gz
 _eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	multilib	d410501a125f99ffb560b0c523cd3d1e	ruby-fakegem	1518a47312d993da9ebf02f89bdeac44	ruby-ng	b696b71528105a90c4e44b101bd7f8ed	ruby-utils	3791942eec3367882de76288f91c9d78	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=c84000bf26a34b00c08775b24a5e10cd
+_md5_=8e28023290b14466f2bcd35094f4a61c
